@@ -10,6 +10,22 @@
         android:id="@+id/productFragment"
         android:name="com.example.fetchrewardstest.destination.product.ProductFragment"
         android:label="ProductFragment"
-        tools:layout="@layout/fragment_product" />
+        tools:layout="@layout/fragment_product">
+
+        <action
+            android:id="@+id/action_productFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.example.fetchrewardstest.destination.productDetail.ProductDetailFragment"
+        android:label="ProductDetailFragment"
+        tools:layout="@layout/fragment_product_detail"/>
 
 </navigation>

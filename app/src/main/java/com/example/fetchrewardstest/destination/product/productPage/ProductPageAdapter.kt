@@ -8,13 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fetchrewardstest.databinding.ItemProductPageBinding
 import com.example.fetchrewardstest.model.Product
 
-class ProductPageAdapter : ListAdapter<Product, ProductPageAdapter.ProductPageViewHolder>(ProductDiffCallback()) {
+class ProductPageAdapter(
+    private val listener: ProductPageListener
+) : ListAdapter<Product, ProductPageAdapter.ProductPageViewHolder>(ProductDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductPageViewHolder {
         return ProductPageViewHolder.create(parent)
     }
 
     override fun onBindViewHolder(holder: ProductPageViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), listener)
     }
 
     class ProductPageViewHolder private constructor(private val binding: ItemProductPageBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -26,8 +28,9 @@ class ProductPageAdapter : ListAdapter<Product, ProductPageAdapter.ProductPageVi
             }
         }
 
-        fun bind(product: Product) {
+        fun bind(product: Product, listener: ProductPageListener) {
             binding.product = product
+            binding.listener = listener
 
             binding.executePendingBindings()
         }
