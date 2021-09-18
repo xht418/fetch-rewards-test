@@ -47,7 +47,12 @@ class ProductViewModel(application: Application, private val repository: Product
     private suspend fun getOrganizedProducts(rawProducts: List<Product>) = withContext(Dispatchers.Default) {
         val organizedProducts = mutableListOf<List<Product>>()
         val validProducts = rawProducts.filter { it.name != null && it.name.isNotEmpty() }
-        val sortedProducts = validProducts.sortedBy { it.name }
+
+        val sortedProducts = validProducts.sortedBy {
+            val nameStrings = it.name!!.split(" ")
+
+            nameStrings[1].toInt()
+        }
 
         for (listId in 1..4) {
             organizedProducts.add(sortedProducts.filter { it.listId == listId.toLong() })

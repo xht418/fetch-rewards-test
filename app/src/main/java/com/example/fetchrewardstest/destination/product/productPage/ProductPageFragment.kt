@@ -1,12 +1,14 @@
 package com.example.fetchrewardstest.destination.product.productPage
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.fetchrewardstest.R
 import com.example.fetchrewardstest.databinding.FragmentProductPageBinding
 import com.example.fetchrewardstest.model.Product
@@ -26,8 +28,18 @@ class ProductPageFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        binding.recyclerView.adapter = ProductPageAdapter()
+        binding.recyclerView.adapter = getProductPageAdapter()
+
+        Log.v("xxx", "loaded!")
 
         return binding.root
+    }
+
+    private fun getProductPageAdapter(): ProductPageAdapter {
+        val itemClickAction: (Product) -> Unit = {
+            findNavController().navigate(R.id.action_productFragment_to_productDetailFragment)
+        }
+
+        return ProductPageAdapter(ProductPageListener(itemClickAction))
     }
 }

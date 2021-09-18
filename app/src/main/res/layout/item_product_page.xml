@@ -9,11 +9,17 @@
             name="product"
             type="com.example.fetchrewardstest.model.Product" />
 
+        <variable
+            name="listener"
+            type="com.example.fetchrewardstest.destination.product.productPage.ProductPageListener" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:foreground="?selectableItemBackground"
+        android:onClick="@{() -> listener.onItemClick(product)}"
         android:padding="16dp">
 
         <TextView
